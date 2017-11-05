@@ -15,59 +15,53 @@ print "login success"
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
-helpMessage =""" Chivas Bot
-[Id︎]
-[Mid]
-[Me︎]
-[TL︎:「Text」]
-[Mc 「mid」]
-[K on/off]
-[Join︎ on/off]
-[Gcancel:︎「Number of people」]
-[Group cancelalll︎]
-[Leave︎ on/off]
-[Add on/off]
-[Share on/off]
-[Message change:「text」]
-[Message check]
-[Confirm]
-[Jam on/off]
-[Change clock:「name」]
-[Up]
-[Cv join]
-
-[*] Command in the groups [*]
-
-[Curl]
-[Ourl]
-[url]
-[url:「Group ID」]
-[Invite：「mid」]
-[Kick：「mid」]
-[Ginfo]
-[jointicket]
-[Cancel]
-[Gn 「group name」]
-[Nk 「name」]
-
-[*] Command kicker only [*]
-
-[Bye]
-[Kill ban]
-[Kill 「@」]
-[Ban 「@」] By Tag
-[Unban 「@」] By Tag
-[Ban︎] Share Contact
-[Unban︎] Share Contact
-[Banlist︎]
-[Cek ban]
-[Cv mid]
-[Cv ︎invite:「mid」]
-[Cv ︎rename:「name」]
-[Cv ︎gift]
-[Respo︎n]
-[Bot cancel]
-[Title:]
+helpMessage =""" [Selfbot For Bii]
+Id︎
+Mid
+Me︎
+TL︎:「Text」
+Mc 「mid」
+K on/off
+Join︎ on/off
+Gcancel:︎「Number of people」
+Group cancelalll︎
+Leave︎ on/off
+Add on/off
+Share on/off
+Message change:「text」
+Message check
+Confirm
+Jam on/off
+Change clock:「name」
+Up
+Cv join
+Curl
+Ourl
+url
+url:「Group ID」
+Invite：「mid」
+Kick：「mid」
+Ginfo
+jointicket
+Cancel
+Gn 「group name」
+Nk 「name」
+Bye
+Kill ban
+Kill 「@」
+Ban 「@」] By Tag
+Unban 「@」] By Tag
+Ban︎ Share Contact
+Unban︎ Share Contact
+Banlist︎
+Cek ban
+Cv mid
+Cv ︎invite:「mid」
+Cv ︎rename:「name」
+Cv ︎gift
+Respo︎n
+Bot cancel
+     [Selfot  bye BII]
 """
 KAC=[cl,ki,kk,kc]
 mid = cl.getProfile().mid
@@ -76,7 +70,7 @@ Bmid = kk.getProfile().mid
 Cmid = kc.getProfile().mid
 
 Bots=[mid,Amid,Bmid,Cmid]
-admin=["YOUR_MID_HERE"]
+admin=["uc77fd25b59f6e563d84f1334f3fed10b"]
 wait = {
     'contact':True,
     'autoJoin':True,
@@ -450,18 +444,18 @@ def bot(op):
                    else:
                         wait["blacklist"][msg.contentMetadata["mid"]] = True
                         wait["wblacklist"] = False
-                        cl.sendText(msg.to,"aded")
-                        ki.sendText(msg.to,"aded")
-                        kk.sendText(msg.to,"aded")
-                        kc.sendText(msg.to,"aded")
+                        cl.sendText(msg.to,"Berhasil")
+                        ki.sendText(msg.to,"Berhasil")
+                        kk.sendText(msg.to,"Berhasil")
+                        kc.sendText(msg.to,"Berhasil")
 
                elif wait["dblacklist"] == True:
                    if msg.contentMetadata["mid"] in wait["blacklist"]:
                         del wait["blacklist"][msg.contentMetadata["mid"]]
-                        cl.sendText(msg.to,"deleted")
-                        ki.sendText(msg.to,"deleted")
-                        kk.sendText(msg.to,"deleted")
-                        kc.sendText(msg.to,"deleted")
+                        cl.sendText(msg.to,"Terhapus")
+                        ki.sendText(msg.to,"Terhapus")
+                        kk.sendText(msg.to,"Terhapus")
+                        kc.sendText(msg.to,"Terhapus")
                         wait["dblacklist"] = False
 
                    else:
@@ -1352,7 +1346,7 @@ def bot(op):
 
 #-----------------------------------------------
 
-            elif msg.text in ["All join"]:
+            elif msg.text in ["Pasukan"]:
                         G = cl.getGroup(msg.to)
                         ginfo = cl.getGroup(msg.to)
                         G.preventJoinByTicket = False
@@ -1410,7 +1404,7 @@ def bot(op):
                         G.preventJoinByTicket = True
                         kc.updateGroup(G)
 #-----------------------------------------------
-            elif msg.text in ["Bye all"]:
+            elif msg.text in ["Menang"]:
                 if msg.toType == 2:
                     ginfo = cl.getGroup(msg.to)
                     try:
@@ -1456,9 +1450,33 @@ def bot(op):
                     except:
                         pass
 #-----------------------------------------------
+            elif msg.text in ["Tagall"]:
+                if msg.form_ in admin:
+                    group = cl.getGroup(msg.to)
+                    nama = [contactmid for contact in group.members]
+                    cb = ""
+                    cb2 = ""
+                    strt = int(0)
+                    akh = int(0)
+                    for md in nama:
+                       akh = akh + int(5)
+                       cd += """["S":"""+json.dumps(str(strt))+""","E":"""+json.dumps(strt(akh))+""","M":"""+json.dumps(md)+"},"""
+                       strt = strt + int(6)
+                       akh = akh + 1
+                       cb2 += "@nrik\n"
+                    cb = (cb[int:int(len(cb)-1)])
+                    msg = (cb[:int(len(cb)-1)1])
+                    msg.contententType = 0
+                    msg.text = cb2
+                    msg.contentMessage(msg) ={'MENTION':'{"MENTIONEES":['+cb+']}','EMTVER':'4'}
+                    try:
+                        cl.sendMessage(msg)
+                    except Exception as error:
+                        print error
+#-----------------------------------------------------
             elif msg.text in ["Kill"]:
                 if msg.toType == 2:
-                    group = ki.getGroup(msg.to)
+                    group = cl.getGroup(msg.to)
                     gMembMids = [contact.mid for contact in group.members]
                     matched_list = []
                     for tag in wait["blacklist"]:
